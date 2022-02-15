@@ -1,0 +1,45 @@
+import numpy as np
+import pandas as pd
+
+##POUR LIRE LE CONTENU D'UN FICHIER BLOCHET
+
+path_d1 = "C:/Users/victo/stage_navier_jupyter/data_eurotunnel/Data/training/1775_20190128/D_1.blochet"
+with open(path_d1, encoding='ISO-8859-1') as f:
+    lines = f.readlines()
+    
+print(len(lines)) #630
+
+def read_number_line(some_line):
+    return [float(s) for s in some_line.split()]
+
+print(read_number_line(lines[42]))
+
+times = []
+speeds = []
+freqs = []
+frfs_real = []
+frfs_imag = []
+
+lines_to_read = lines[15:len(lines)] #les valeurs commencent à la ligne 16
+
+for position, line in enumerate(open(path_d1, encoding='ISO-8859-1')):
+    if position in lines_to_read:
+        read_line = read_number_line(line)
+        print(read_line)
+        for j in range(5):
+            if j % 5 == 0:
+                times.append(read_line[j])
+            elif j % 5 == 1:
+                speeds.append(read_line[j])
+            elif j % 5 == 2:
+                freqs.append(read_line[j])
+            elif j % 5 == 3:
+                frfs_real.append(read_line[j])
+            else:
+                frfs_imag.append(read_line[j])
+                
+print(times, len(times))
+
+dict = {"Temps":times, "Vitesses":speeds, "Frequences":freqs, "FRF Real":frfs_real, "FRF Imag":frfs_imag}
+
+df = pd.DataFrame(dict)
