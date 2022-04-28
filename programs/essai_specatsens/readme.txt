@@ -1,1 +1,4 @@
 Influence de la valeur de la sensitivité sur SpecAtSens pour trouver le FPR, visualisation de l'écart avec le FPR calculé avec les données de fp et tn
+
+Axe x = epochs (30)
+Axe y = FPR
